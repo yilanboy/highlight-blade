@@ -2,7 +2,7 @@ import {describe, expect, it} from 'vitest';
 import hljs from 'highlight.js/lib/core';
 import xml from 'highlight.js/lib/languages/xml';
 import php from 'highlight.js/lib/languages/php';
-import blade from '../src';
+import blade from '../src/index.js';
 
 hljs.registerLanguage('xml', xml)
 hljs.registerLanguage('blade', blade);
