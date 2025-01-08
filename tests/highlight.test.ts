@@ -8,8 +8,8 @@ hljs.registerLanguage('xml', xml)
 hljs.registerLanguage('blade', blade);
 hljs.registerLanguage('php', php);
 
-describe('highlight laravel blade', () => {
-    it('should highlight the if else condition as keyword', () => {
+describe('highlight laravel blade template', () => {
+    it('should highlight the @if directive as keyword', () => {
         const code = `
         @if ($isTrue)
             <p>Yes</p>
@@ -26,7 +26,7 @@ describe('highlight laravel blade', () => {
             .to.contain('<span class="hljs-keyword">@endif</span>');
     });
 
-    it('should highlight the for loop as keyword', () => {
+    it('should highlight the @for directive as keyword', () => {
         const code = `
         @for ($i = 0; $i < 10; $i++)
             <p>{{ $i }}</p>
@@ -39,7 +39,7 @@ describe('highlight laravel blade', () => {
             .to.contain('<span class="hljs-keyword">@endfor</span>');
     });
 
-    it('should highlight the foreach loop as keyword', () => {
+    it('should highlight the @foreach directive as keyword', () => {
         const code = `
         @foreach ($items as $item)
             <p>{{ $item }}</p>
@@ -52,7 +52,7 @@ describe('highlight laravel blade', () => {
             .to.contain('<span class="hljs-keyword">@endforeach</span>');
     });
 
-    it('should highlight the while loop as keyword', () => {
+    it('should highlight the @while directive as keyword', () => {
         const code = `
         @while ($i < 10)
             <p>{{ $i }}</p>
@@ -66,23 +66,45 @@ describe('highlight laravel blade', () => {
             .to.contain('<span class="hljs-keyword">@endwhile</span>');
     });
 
-    it('should highlight the escape template tag', () => {
+    it('should highlight the escape template variable', () => {
         const code = '{{ $i }}';
         const result = hljs.highlightAuto(code, ['blade']);
 
         expect(result.value)
-            .to.contain('<span class="hljs-template-tag">{{</span>')
+            .to.contain('<span class="hljs-template-variable">{{</span>')
             .to.contain('<span class="language-php"> <span class="hljs-variable">$i</span> </span>')
-            .to.contain('<span class="hljs-template-tag">}}</span>');
+            .to.contain('<span class="hljs-template-variable">}}</span>');
     });
 
-    it('should highlight the escape template tag', () => {
+    it('should highlight the unescape template variable', () => {
         const code = '{!! $i !!}';
         const result = hljs.highlightAuto(code, ['blade']);
 
         expect(result.value)
-            .to.contain('<span class="hljs-template-tag">{!!</span>')
+            .to.contain('<span class="hljs-template-variable">{!!</span>')
             .to.contain('<span class="language-php"> <span class="hljs-variable">$i</span> </span>')
-            .to.contain('<span class="hljs-template-tag">!!}</span>');
+            .to.contain('<span class="hljs-template-variable">!!}</span>');
+    });
+
+    it('should highlight the statement after @use directive', () => {
+        const code = "@use('App\\Models\\Flight')"
+        const result = hljs.highlightAuto(code, ['blade']);
+
+        console.log(result.value)
+
+        expect(result.value)
+            .to.contain('<span class="hljs-keyword">@use</span>')
+            .to.contain(`<span class="language-xml">(</span><span class="language-php"><span class="hljs-string">&#x27;App\\Models\\Flight&#x27;</span></span><span class="language-xml">)</span>`);
+    });
+
+    it('should highlight the statement after @class directive', () => {
+        const code = "@class(['p-1', 'bg-gray-100' => $active, 'bg-gray-200' => !$active])"
+        const result = hljs.highlightAuto(code, ['blade']);
+
+        console.log(result.value)
+
+        expect(result.value)
+            .to.contain('<span class="hljs-keyword">@class</span>')
+            .to.contain(`[<span class="hljs-string">&#x27;p-1&#x27;</span>, <span class="hljs-string">&#x27;bg-gray-100&#x27;</span> =&gt; <span class="hljs-variable">$active</span>, <span class="hljs-string">&#x27;bg-gray-200&#x27;</span> =&gt; !<span class="hljs-variable">$active</span>]`);
     });
 });

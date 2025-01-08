@@ -18,7 +18,9 @@
   },
   "keywords": [
     "highlight.js",
-    "syntax highlight",
+    "highlightjs",
+    "syntax",
+    "highlight",
     "laravel",
     "blade"
   ],

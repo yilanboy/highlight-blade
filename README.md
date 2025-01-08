@@ -45,3 +45,10 @@ hljs.registerLanguage('blade', blade);
 More information about importing highlight.js library, please refer
 to [here](https://highlightjs.readthedocs.io/en/latest/readme.html#importing-the-library).
 
+## TODO
+
+- [x] Support Laravel Blade syntax
+- [ ] Support Laravel Livewire syntax
+- [ ] Support Alpine.js syntax
+
+
