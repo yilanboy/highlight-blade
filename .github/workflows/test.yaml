@@ -1,0 +1,28 @@
+name: Run Test
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 23
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+
+      # https://github.com/vitejs/vite/discussions/15532
+      - name: Install dependencies
+        run: npm install && npm install @rollup/rollup-linux-x64-gnu --save-optional
+
+      - name: Run tests
+        run: npm test
