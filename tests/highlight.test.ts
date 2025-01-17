@@ -87,14 +87,14 @@ describe('highlight laravel blade template', () => {
     });
 
     it('should highlight the statement after @use directive', () => {
-        const code = "@use('App\\Models\\Flight')"
+        const code = "@use('App\\Models\\Flight')\n"
         const result = hljs.highlightAuto(code, ['blade']);
 
         console.log(result.value)
 
         expect(result.value)
             .to.contain('<span class="hljs-keyword">@use</span>')
-            .to.contain(`<span class="language-xml">(</span><span class="language-php"><span class="hljs-string">&#x27;App\\Models\\Flight&#x27;</span></span><span class="language-xml">)</span>`);
+            .to.contain(`<span class="language-php"><span class="hljs-string">&#x27;App\\Models\\Flight&#x27;</span></span>`);
     });
 
     it('should highlight the statement after @class directive', () => {

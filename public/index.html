@@ -62,10 +62,48 @@
   wire:navigate
 &#x3E;
   &#x3C;x-icon.home class=&#x22;w-4&#x22; /&#x3E;
-  &#x3C;span class=&#x22;ml-2&#x22;&#x3E;&#x5168;&#x90E8;&#x6587;&#x7AE0;&#x3C;/span&#x3E;
+  &#x3C;span class=&#x22;ml-2&#x22;&#x3E;All Posts&#x3C;/span&#x3E;
 &#x3C;/a&#x3E;
 
 &#x3C;x-alert type=&#x22;error&#x22; :message=&#x22;$message&#x22; class=&#x22;mt-4&#x22;/&#x3E;</code>
+    </pre>
+
+    <h3># If Condition</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">@if ($attributes-&#x3E;has(&#x27;class&#x27;))
+    &#x3C;div&#x3E;Class attribute is present&#x3C;/div&#x3E;
+@endif</code>
+    </pre>
+
+    <h3># If Else Condition</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">@if (count($records) === 1)
+    I have one record!
+@elseif (count($records) &#x3E; 1)
+    I have multiple records!
+@else
+    I don&#x27;t have any records!
+@endif</code>
+    </pre>
+
+    <h3># Foreach Condition</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">&#x3C;select name=&#x22;version&#x22;&#x3E;
+    @foreach ($product-&#x3E;versions as $version)
+        &#x3C;option value=&#x22;{{ $version }}&#x22; @selected(old(&#x27;version&#x27;) == $version)&#x3E;
+            {{ $version }}
+        &#x3C;/option&#x3E;
+    @endforeach
+&#x3C;/select&#x3E;</code>
+    </pre>
+
+    <h3># Use Directive</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">@use('App\Models\Flight')</code>
     </pre>
 
     <h2>Alpine.js</h2>

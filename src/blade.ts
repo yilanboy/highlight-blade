@@ -76,7 +76,7 @@ export default function (hljs: HLJSApi): Language {
     const STATEMENT_AFTER_BLADE_DIRECTIVES = {
         begin: /(?<=@[a-zA-Z]+\s?)(?<begin>\()/,
         excludeBegin: true,
-        end: /(?<end>\))/,
+        end: /(?<end>\))(?=\r?\n|>|\/>)/,
         excludeEnd: true,
         subLanguage: 'php',
     };
