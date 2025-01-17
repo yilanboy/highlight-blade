@@ -90,10 +90,10 @@ export default function (hljs: HLJSApi): Language {
         beginScope: 'punctuation',
         end: /(?<end>\))/,
         endScope: 'punctuation',
-        'on:begin': (match: any, response: CallbackResponse) => {
+        'on:begin': (match: { index: number }, response: CallbackResponse) => {
             response.data._beginIndex = match.index;
         },
-        'on:end': (match: any, response: CallbackResponse) => {
+        'on:end': (match: { input: string, index: number }, response: CallbackResponse) => {
             const stringBetweenBeginAndEnd: string = match.input.slice(response.data._beginIndex + 1, match.index);
 
             if (countChar(stringBetweenBeginAndEnd, '(') !== countChar(stringBetweenBeginAndEnd, ')')) {
