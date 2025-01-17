@@ -42,8 +42,9 @@ export default function (hljs: HLJSApi): Language {
     };
 
     // :class="open ? '' : 'hidden'"
+    //
     const ALPINE_JS_STATEMENT_AFTER_X_BIND_SHORTHAND_SYNTAX = {
-        begin: /(?<=\s)(?<begin>:[a-z0-9:.-]+=")/,
+        begin: /(?<=\s)(?<begin>::\w+=")/,
         excludeBegin: true,
         end: /(?<end>")/,
         excludeEnd: true,
@@ -105,7 +106,7 @@ export default function (hljs: HLJSApi): Language {
 
     // x-data, x-init, x-show, x-on, etc.
     const ALPINE_JS_DIRECTIVES = {
-        begin: /(?<=\sx-(?!transition)[a-z0-9:.-]{2,}=)(?<begin>")/,
+        begin: /(?<=\sx-(?!transition|ref)[a-z0-9:.-]{2,}=)(?<begin>")/,
         excludeBegin: true,
         end: /(?<end>")/,
         excludeEnd: true,

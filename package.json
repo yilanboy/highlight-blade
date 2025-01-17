@@ -1,6 +1,6 @@
 {
   "name": "highlight-blade",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A highlight.js plugin for laravel blade template",
   "type": "module",
   "main": "dist/index.js",
@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "test": "vitest",
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsc --watch"
   },
   "repository": {
     "type": "git",

@@ -137,13 +137,13 @@
 &#x3C;/div&#x3E;</code>
     </pre>
 
-    <h3># x-bind Shorthand Syntax</h3>
+    <h3># x-bind Shorthand Syntax (In Laravel Blade)</h3>
 
     <pre data-language="Blade" spellcheck="false" class="text-base">
         <code class="language-blade">&#x3C;div x-data=&#x22;{ open: false }&#x22;&#x3E;
     &#x3C;button x-on:click=&#x22;open = ! open&#x22;&#x3E;Toggle Dropdown&#x3C;/button&#x3E;
 
-    &#x3C;div :class=&#x22;open ? &#x27;&#x27; : &#x27;hidden&#x27;&#x22;&#x3E;
+    &#x3C;div ::class=&#x22;open ? &#x27;&#x27; : &#x27;hidden&#x27;&#x22;&#x3E;
         Dropdown Contents...
     &#x3C;/div&#x3E;
 &#x3C;/div&#x3E;</code>
@@ -194,6 +194,14 @@
         x-transition:leave-end=&#x22;opacity-0 scale-90&#x22;
     &#x3E;Hello &#x1F44B;&#x3C;/div&#x3E;
 &#x3C;/div&#x3E;</code>
+    </pre>
+
+    <h3># x-ref</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">&#x3C;button @click=&#x22;$refs.text.remove()&#x22;&#x3E;Remove Text&#x3C;/button&#x3E;
+
+&#x3C;span x-ref=&#x22;text&#x22;&#x3E;Hello &#x1F44B;&#x3C;/span&#x3E;</code>
     </pre>
 </main>
 
