@@ -1,4 +1,15 @@
-import type {HLJSApi, Language} from 'highlight.js';
+import type {CallbackResponse, HLJSApi, Language} from 'highlight.js';
+
+function countChar(string: string, char: string) {
+    let count = 0;
+    for (let i = 0; i < string.length; i++) {
+        if (string[i] === char) {
+            count++;
+        }
+    }
+
+    return count;
+}
 
 export default function (hljs: HLJSApi): Language {
     // {{ $escaped ? 'true' : 'false' }}
@@ -70,14 +81,25 @@ export default function (hljs: HLJSApi): Language {
         match: /(?<match>@[a-zA-Z]+)/,
     };
 
+
     // @foreach ($list as $item)
     // or
     // @foreach($list as $item)
     const STATEMENT_AFTER_BLADE_DIRECTIVES = {
         begin: /(?<=@[a-zA-Z]+\s?)(?<begin>\()/,
-        excludeBegin: true,
-        end: /(?<end>\))(?=\r?\n|>|\/>)/,
-        excludeEnd: true,
+        beginScope: 'punctuation',
+        end: /(?<end>\))/,
+        endScope: 'punctuation',
+        'on:begin': (match: any, response: CallbackResponse) => {
+            response.data._beginIndex = match.index;
+        },
+        'on:end': (match: any, response: CallbackResponse) => {
+            const stringBetweenBeginAndEnd: string = match.input.slice(response.data._beginIndex + 1, match.index);
+
+            if (countChar(stringBetweenBeginAndEnd, '(') !== countChar(stringBetweenBeginAndEnd, ')')) {
+                response.ignoreMatch();
+            }
+        },
         subLanguage: 'php',
     };
 
