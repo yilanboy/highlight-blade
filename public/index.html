@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Highlight Blade</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        .jetbrains-mono-regular {
+            font-family: "JetBrains Mono", serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .m-auto {
+            margin: auto;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .max-w-2xl {
+            max-width: 42rem;
+        }
+
+        .text-base {
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
+    </style>
+</head>
+<body class="jetbrains-mono-regular w-full">
+<main class="max-w-2xl m-auto">
+    <h1>Examples of Highlight Blade</h1>
+
+    <p>Highlight Laravel Blade Template with highlight.js.</p>
+
+    <h2>Blade Template</h2>
+
+    <h3># Basic</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">@php
+  $inIndexPage = request()-&#x3E;url() === route(&#x27;posts.index&#x27;);
+@endphp
+
+&#x3C;a
+  href=&#x22;{{ route(&#x27;posts.index&#x27;) }}&#x22;
+  @class([
+      &#x27;flex items-center ...&#x27;,
+      &#x27;bg-gray-200 text-gray-900 ...&#x27; =&#x3E; $inIndexPage,
+      &#x27;text-gray-500 dark:text-gray-400 ...&#x27; =&#x3E; !$inIndexPage,
+  ])
+  wire:navigate
+&#x3E;
+  &#x3C;x-icon.home class=&#x22;w-4&#x22; /&#x3E;
+  &#x3C;span class=&#x22;ml-2&#x22;&#x3E;&#x5168;&#x90E8;&#x6587;&#x7AE0;&#x3C;/span&#x3E;
+&#x3C;/a&#x3E;
+
+&#x3C;x-alert type=&#x22;error&#x22; :message=&#x22;$message&#x22; class=&#x22;mt-4&#x22;/&#x3E;</code>
+    </pre>
+
+    <h2>Alpine.js</h2>
+
+    <h3># Basic</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">&#x3C;div x-data=&#x22;{ open: false, toggle() { this.open = ! this.open } }&#x22;&#x3E;
+    &#x3C;button @click=&#x22;toggle()&#x22;&#x3E;Toggle Content&#x3C;/button&#x3E;
+
+    &#x3C;div x-show=&#x22;open&#x22;&#x3E;
+        Content...
+    &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;</code>
+    </pre>
+
+    <h3># x-init</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">&#x3C;div
+    x-data=&#x22;{ posts: [] }&#x22;
+    x-init=&#x22;posts = await (await fetch(&#x27;/posts&#x27;)).json()&#x22;
+&#x3E;...&#x3C;/div&#x3E;</code>
+    </pre>
+
+    <h3># x-bind</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">&#x3C;div x-data=&#x22;{ placeholder: &#x27;Type here...&#x27; }&#x22;&#x3E;
+    &#x3C;input type=&#x22;text&#x22; x-bind:placeholder=&#x22;placeholder&#x22;&#x3E;
+&#x3C;/div&#x3E;</code>
+    </pre>
+
+    <h3># x-bind Shorthand Syntax</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">&#x3C;div x-data=&#x22;{ open: false }&#x22;&#x3E;
+    &#x3C;button x-on:click=&#x22;open = ! open&#x22;&#x3E;Toggle Dropdown&#x3C;/button&#x3E;
+
+    &#x3C;div :class=&#x22;open ? &#x27;&#x27; : &#x27;hidden&#x27;&#x22;&#x3E;
+        Dropdown Contents...
+    &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;</code>
+    </pre>
+
+    <h3># x-on</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">&#x3C;button x-on:click=&#x22;alert(&#x27;Hello World!&#x27;)&#x22;&#x3E;Say Hi&#x3C;/button&#x3E;</code>
+    </pre>
+
+    <h3># x-on Shorthand Syntax</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">&#x3C;button type=&#x22;button&#x22;
+    @click=&#x22;message = &#x27;selected&#x27;&#x22;
+    @click.shift=&#x22;message = &#x27;added to selection&#x27;&#x22;
+    @mousemove.shift=&#x22;message = &#x27;add to selection&#x27;&#x22;
+    @mouseout=&#x22;message = &#x27;select&#x27;&#x22;
+    x-text=&#x22;message&#x22;
+&#x3E;
+&#x3C;/button&#x3E;</code>
+    </pre>
+
+    <h3># x-for</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">&#x3C;ul x-data=&#x22;{ colors: [&#x27;Red&#x27;, &#x27;Orange&#x27;, &#x27;Yellow&#x27;] }&#x22;&#x3E;
+    &#x3C;template x-for=&#x22;color in colors&#x22;&#x3E;
+        &#x3C;li x-text=&#x22;color&#x22;&#x3E;&#x3C;/li&#x3E;
+    &#x3C;/template&#x3E;
+&#x3C;/ul&#x3E;</code>
+    </pre>
+
+    <h3># x-transition</h3>
+
+    <pre data-language="Blade" spellcheck="false" class="text-base">
+        <code class="language-blade">&#x3C;div x-data=&#x22;{ open: false }&#x22;&#x3E;
+    &#x3C;button @click=&#x22;open = ! open&#x22;&#x3E;Toggle&#x3C;/button&#x3E;
+
+    &#x3C;div
+        x-show=&#x22;open&#x22;
+        x-transition:enter=&#x22;transition ease-out duration-300&#x22;
+        x-transition:enter-start=&#x22;opacity-0 scale-90&#x22;
+        x-transition:enter-end=&#x22;opacity-100 scale-100&#x22;
+        x-transition:leave=&#x22;transition ease-in duration-300&#x22;
+        x-transition:leave-start=&#x22;opacity-100 scale-100&#x22;
+        x-transition:leave-end=&#x22;opacity-0 scale-90&#x22;
+    &#x3E;Hello &#x1F44B;&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;</code>
+    </pre>
+</main>
+
+<script type="module">
+    import hljs from 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/es/highlight.min.js';
+    import blade from 'https://cdn.jsdelivr.net/npm/highlight-blade@latest/+esm'
+
+    hljs.registerLanguage('blade', blade);
+    hljs.highlightAll();
+</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Highlight Blade
 
-Highlight Laravel Blade syntax with [highlight.js](https://highlightjs.org/).
+Highlight Laravel Blade & Alpine.js syntax with [highlight.js](https://highlightjs.org/).
 
 ## Installation
 
@@ -21,11 +21,13 @@ Load only the language definitions you need.
 ```javascript
 // import core hljs api and required languages
 import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
 import xml from 'highlight.js/lib/languages/xml';
 import php from 'highlight.js/lib/languages/php';
 import blade from 'highlight-blade';
 
 // register each language definition
+hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('php', php);
 hljs.registerLanguage('blade', blade);
@@ -48,7 +50,6 @@ to [here](https://highlightjs.readthedocs.io/en/latest/readme.html#importing-the
 ## TODO
 
 - [x] Support Laravel Blade syntax
-- [ ] Support Laravel Livewire syntax
-- [ ] Support Alpine.js syntax
+- [x] Support Alpine.js syntax
 
 

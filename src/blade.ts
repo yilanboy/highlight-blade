@@ -30,6 +30,15 @@ export default function (hljs: HLJSApi): Language {
         subLanguage: 'php',
     };
 
+    // :class="open ? '' : 'hidden'"
+    const ALPINE_JS_STATEMENT_AFTER_X_BIND_SHORTHAND_SYNTAX = {
+        begin: /(?<=\s)(?<begin>:[a-z0-9:.-]+=")/,
+        excludeBegin: true,
+        end: /(?<end>")/,
+        excludeEnd: true,
+        subLanguage: 'javascript',
+    }
+
     // :blade-value="$phpVar"
     const BLADE_COMPONENT_ATTRIBUTE = {
         begin: /(?<=\s)(?<begin>:[\w-]+=")/,
@@ -38,6 +47,22 @@ export default function (hljs: HLJSApi): Language {
         excludeEnd: true,
         subLanguage: 'php',
     };
+
+    // @click
+    // @mousemove.shift
+    const ALPINE_JS_X_ON_SHORTHAND_SYNTAX = {
+        match: /(?<match>@[a-z0-9:.-]{2,})(?==")/,
+        scope: 'title.function'
+    }
+
+    // @click="toggle()"
+    const ALPINE_JS_STATEMENT_AFTER_X_ON_SHORTHAND_SYNTAX = {
+        begin: /(?<=\s@[a-z0-9:.-]{2,}=)(?<begin>")/,
+        excludeBegin: true,
+        end: /(?<end>")/,
+        excludeEnd: true,
+        subLanguage: 'javascript',
+    }
 
     // @somethingLikeThis
     const BLADE_DIRECTIVES = {
@@ -56,6 +81,15 @@ export default function (hljs: HLJSApi): Language {
         subLanguage: 'php',
     };
 
+    // x-data, x-init, x-show, x-on, etc.
+    const ALPINE_JS_DIRECTIVES = {
+        begin: /(?<=\sx-(?!transition)[a-z0-9:.-]{2,}=)(?<begin>")/,
+        excludeBegin: true,
+        end: /(?<end>")/,
+        excludeEnd: true,
+        subLanguage: 'javascript',
+    }
+
     return {
         aliases: ['blade'],
         case_insensitive: false,
@@ -65,9 +99,13 @@ export default function (hljs: HLJSApi): Language {
             ESCAPED_TEMPLATE_VARIABLE,
             UNESCAPED_TEMPLATE_VARIABLE,
             RAW_PHP,
+            ALPINE_JS_STATEMENT_AFTER_X_BIND_SHORTHAND_SYNTAX,
             BLADE_COMPONENT_ATTRIBUTE,
+            ALPINE_JS_X_ON_SHORTHAND_SYNTAX,
+            ALPINE_JS_STATEMENT_AFTER_X_ON_SHORTHAND_SYNTAX,
             BLADE_DIRECTIVES,
             STATEMENT_AFTER_BLADE_DIRECTIVES,
+            ALPINE_JS_DIRECTIVES,
         ],
     };
 }

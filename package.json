@@ -1,6 +1,6 @@
 {
   "name": "highlight-blade",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A highlight.js plugin for laravel blade template",
   "type": "module",
   "main": "dist/index.js",
@@ -22,7 +22,9 @@
     "syntax",
     "highlight",
     "laravel",
-    "blade"
+    "blade",
+    "alpine.js",
+    "alpinejs"
   ],
   "author": "yilanboy",
   "license": "MIT",
