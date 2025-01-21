@@ -63,13 +63,13 @@ export default function (hljs: HLJSApi): Language {
     // @click
     // @mousemove.shift
     const ALPINE_JS_X_ON_SHORTHAND_SYNTAX = {
-        match: /(?<match>@[a-z0-9:.-]{2,})(?==")/,
-        scope: 'title.function'
+        match: /(?<match>@[a-z0-9:.-]+)(?==")/,
+        scope: 'title.function',
     }
 
     // @click="toggle()"
     const ALPINE_JS_STATEMENT_AFTER_X_ON_SHORTHAND_SYNTAX = {
-        begin: /(?<=\s@[a-z0-9:.-]{2,}=)(?<begin>")/,
+        begin: /(?<=\s@[a-z0-9:.-]+=)(?<begin>")/,
         excludeBegin: true,
         end: /(?<end>")/,
         excludeEnd: true,
